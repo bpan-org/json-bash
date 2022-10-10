@@ -1,0 +1,60 @@
+# Configuration for the 'json-bash' BPAN package.
+
+[bpan]
+api-version = 1
+
+# Required package info:
+[package]
+name = json
+version = 0.0.0
+title = A short description of the 'json-bash' package
+license = MIT
+copyright = 2022
+repo = https://github.com/ingydotnet/json-bash
+branch = main
+bug = $repo/issues/
+tags = bash bpan
+
+# Extra package info:
+site = $repo
+irc = irc.libera.chat/bpan
+
+# Required author info:
+[author]
+name = Ingy döt Net
+email = ingy@ingy.net
+github = ingydotnet
+
+# Optional author info:
+site = https://github.com/ingydotnet
+twitter = ___
+irc = ___@irc.libera.chat
+matrix = @___:matrix.org
+
+# Add an owner entry for each user that can release this package.
+[owner]
+github = ingydotnet
+
+# Required packages.
+[require "package"]
+bashplus = 0.0.0+
+getopt-bash = 0.0.0+
+
+# Required external commands.
+[require "command"]
+bash = 3.2+
+
+# Packages, Files and Manpages to update (bpan update).
+[update]
+file = .bpan/lib/bpan.bash
+file = .rc
+file = test/00-shellcheck.t
+file = test/init
+file = ReadMe.md doc/json.md
+man1 = doc/json.md
+file = License
+file = Makefile
+package = bashplus
+package = getopt-bash
+
+# vim: ft=gitconfig:

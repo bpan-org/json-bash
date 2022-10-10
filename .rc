@@ -1,0 +1,78 @@
+#!/bash
+
+# Use one of the following commands to activate `json` in your shell:
+#
+# ash  | JSON_ROOT=/path/to/json . /path/to/json/.rc
+# bash | source /path/to/json/.rc
+# dash | JSON_ROOT=/path/to/json . /path/to/json/.rc
+# fish | source /path/to/json/.rc
+# ksh  | JSON_ROOT=/path/to/json . /path/to/json/.rc
+# mksh | JSON_ROOT=/path/to/json . /path/to/json/.rc
+# mrsh | JSON_ROOT=/path/to/json; . /path/to/json/.rc
+# posh | JSON_ROOT=/path/to/json . /path/to/json/.rc
+# sh   | JSON_ROOT=/path/to/json . /path/to/json/.rc
+# tcsh | source /path/to/json/.rc
+# yash | . /path/to/json/.rc 2>/dev/null
+# zsh  | source /path/to/json/.rc
+
+# Note: tcsh must come first or this won't work (for tcsh).
+
+# tcsh
+test -n "$tcsh" && eval '\
+set s = ($_) \
+@ i = $#s - 1 \
+set d = `dirname $s[$i]` \
+setenv JSON_ROOT `cd $d && pwd -P` \
+setenv PATH "$JSON_ROOT/bin:$JSON_ROOT/local/bin:$PATH" \
+setenv MANPATH "$JSON_ROOT/man:$JSON_ROOT/local/man:`manpath -q`" \
+exit 0 \
+'
+
+# bash
+test -n "$BASH_VERSION" && eval '
+JSON_ROOT=$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd -P)
+PATH=$JSON_ROOT/bin:$JSON_ROOT/local/bin:$PATH
+MANPATH=$JSON_ROOT/man:$JSON_ROOT/local/man:$(manpath -q)
+export JSON_ROOT PATH MANPATH
+return
+'
+
+# zsh
+test -n "$ZSH_VERSION" && eval '
+JSON_ROOT=$(cd "$(dirname "$0")" && pwd -P)
+PATH=$JSON_ROOT/bin:$JSON_ROOT/local/bin:$PATH
+MANPATH=$JSON_ROOT/man:$JSON_ROOT/local/man:$(manpath -q)
+export JSON_ROOT PATH MANPATH
+return
+'
+
+# fish
+test -n "$FISH_VERSION" && eval '
+set JSON_ROOT (cd (dirname (status filename)) && pwd -P)
+set PATH $JSON_ROOT/bin:$JSON_ROOT/local/bin:$PATH
+set MANPATH $JSON_ROOT/man:$JSON_ROOT/local/man:(manpath -q)
+export JSON_ROOT PATH MANPATH
+exit
+'
+
+# yash
+test -n "$YASH_VERSION" && eval '
+JSON_ROOT=$(cd "$(dirname "$0")" && pwd -P)
+PATH=$JSON_ROOT/bin:$JSON_ROOT/local/bin:$PATH
+MANPATH=$JSON_ROOT/man:$JSON_ROOT/local/man:$(manpath -q)
+export JSON_SHELL JSON_ROOT PATH MANPATH
+return
+'
+
+# Other shells including:
+# ash, dash, ksh, mksh, mrsh, posh, sh
+test -d "$JSON_ROOT" && eval '
+PATH=$JSON_ROOT/bin:$JSON_ROOT/local/bin:$PATH
+MANPATH=$JSON_ROOT/man:$JSON_ROOT/local/man:$(manpath -q)
+export JSON_ROOT PATH MANPATH
+return
+'
+
+echo "ERROR: for shell '$0', set JSON_ROOT=/path/to/json before sourcing .rc"
+
+# vim: ft=sh:
