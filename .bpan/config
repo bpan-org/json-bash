@@ -2,6 +2,8 @@
 
 [bpan]
 api-version = 1
+version = 0.1.107
+updated = 2023-07-14T12:55:47Z
 
 # Required package info:
 [package]

@@ -19,12 +19,13 @@
 
 # tcsh
 test -n "$tcsh" && eval '\
+setenv JSON_SHELL tcsh \
 set s = ($_) \
 @ i = $#s - 1 \
 set d = `dirname $s[$i]` \
 setenv JSON_ROOT `cd $d && pwd -P` \
-setenv PATH "$JSON_ROOT/bin:$JSON_ROOT/local/bin:$PATH" \
-setenv MANPATH "$JSON_ROOT/man:$JSON_ROOT/local/man:`manpath -q`" \
+setenv PATH $JSON_ROOT/bin\:$JSON_ROOT/local/bin\:/usr/local/bin\:/usr/bin\:/bin \
+setenv MANPATH $JSON_ROOT/man\:$JSON_ROOT/local/man\:`manpath` \
 exit 0 \
 '
 
@@ -32,7 +33,7 @@ exit 0 \
 test -n "$BASH_VERSION" && eval '
 JSON_ROOT=$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd -P)
 PATH=$JSON_ROOT/bin:$JSON_ROOT/local/bin:$PATH
-MANPATH=$JSON_ROOT/man:$JSON_ROOT/local/man:$(manpath -q)
+MANPATH=$JSON_ROOT/man:$JSON_ROOT/local/man:$(manpath 2>/dev/null)
 export JSON_ROOT PATH MANPATH
 return
 '
@@ -41,7 +42,7 @@ return
 test -n "$ZSH_VERSION" && eval '
 JSON_ROOT=$(cd "$(dirname "$0")" && pwd -P)
 PATH=$JSON_ROOT/bin:$JSON_ROOT/local/bin:$PATH
-MANPATH=$JSON_ROOT/man:$JSON_ROOT/local/man:$(manpath -q)
+MANPATH=$JSON_ROOT/man:$JSON_ROOT/local/man:$(manpath 2>/dev/null)
 export JSON_ROOT PATH MANPATH
 return
 '
@@ -50,7 +51,7 @@ return
 test -n "$FISH_VERSION" && eval '
 set JSON_ROOT (cd (dirname (status filename)) && pwd -P)
 set PATH $JSON_ROOT/bin:$JSON_ROOT/local/bin:$PATH
-set MANPATH $JSON_ROOT/man:$JSON_ROOT/local/man:(manpath -q)
+set MANPATH $JSON_ROOT/man:$JSON_ROOT/local/man:(manpath 2>/dev/null)
 export JSON_ROOT PATH MANPATH
 exit
 '
@@ -59,7 +60,7 @@ exit
 test -n "$YASH_VERSION" && eval '
 JSON_ROOT=$(cd "$(dirname "$0")" && pwd -P)
 PATH=$JSON_ROOT/bin:$JSON_ROOT/local/bin:$PATH
-MANPATH=$JSON_ROOT/man:$JSON_ROOT/local/man:$(manpath -q)
+MANPATH=$JSON_ROOT/man:$JSON_ROOT/local/man:$(manpath 2>/dev/null)
 export JSON_SHELL JSON_ROOT PATH MANPATH
 return
 '
@@ -68,7 +69,7 @@ return
 # ash, dash, ksh, mksh, mrsh, posh, sh
 test -d "$JSON_ROOT" && eval '
 PATH=$JSON_ROOT/bin:$JSON_ROOT/local/bin:$PATH
-MANPATH=$JSON_ROOT/man:$JSON_ROOT/local/man:$(manpath -q)
+MANPATH=$JSON_ROOT/man:$JSON_ROOT/local/man:$(manpath 2>/dev/null)
 export JSON_ROOT PATH MANPATH
 return
 '
