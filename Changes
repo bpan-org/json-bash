@@ -1,3 +1,7 @@
+[version "0.1.1"]
+date = 2023-07-14T13:09:37Z
+done = Add specific author name
+
 [version "0.1.0"]
 date = 2023-07-14T12:59:26Z
 done = First release
