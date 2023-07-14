@@ -22,7 +22,7 @@ site = $repo
 irc = irc.libera.chat/bpan
 
 # Required author info:
-[author]
+[author "ingy"]
 name = Ingy döt Net
 email = ingy@ingy.net
 github = ingydotnet
