@@ -1,62 +1,29 @@
-# Configuration for the 'json-bash' BPAN package.
-
 [bpan]
-api-version = 1
-version = 0.1.107
-updated = 2023-07-14T13:09:38Z
+version = 0.1.106
+updated = 2023-01-01T12:28:25Z
 
-# Required package info:
 [package]
-name = json
-version = 0.1.1
-title = A short description of the 'json-bash' package
+id = github:bpan-org/json-bash
+version = 0.1.2
+title = JSON library for Bash
 license = MIT
-copyright = 2022
-repo = https://github.com/ingydotnet/json-bash
-branch = main
-bug = $repo/issues/
-tags = bash bpan
+copyright = 2023
+type = bash:lib
 
-# Extra package info:
-site = $repo
 irc = irc.libera.chat/bpan
 
-# Required author info:
-[author "ingy"]
+[author "github:ingydotnet"]
 name = Ingy döt Net
 email = ingy@ingy.net
-github = ingydotnet
+irc = ingy@irc.libera.chat
+matrix = @ingy:yaml.io
 
-# Optional author info:
-site = https://github.com/ingydotnet
-twitter = ___
-irc = ___@irc.libera.chat
-matrix = @___:matrix.org
-
-# Add an owner entry for each user that can release this package.
-[owner]
-github = ingydotnet
-
-# Required packages.
-[require "package"]
-bashplus = 0.0.0+
-getopt-bash = 0.0.0+
-
-# Required external commands.
-[require "command"]
-bash = 3.2+
-
-# Packages, Files and Manpages to update (bpan update).
 [update]
-file = .bpan/lib/bpan.bash
-file = .rc
-file = test/00-shellcheck.t
-file = test/init
-file = ReadMe.md doc/json.md
-man1 = doc/json.md
 file = License
 file = Makefile
-package = bashplus
-package = getopt-bash
+file = ReadMe.md doc/json.md
+file = test/00-shellcheck.t
+file = test/init
+man3 = doc/json.md
 
 # vim: ft=gitconfig:
